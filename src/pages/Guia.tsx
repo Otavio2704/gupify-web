@@ -150,7 +150,7 @@ export default function Guia() {
                 <div>
                   <h4 className="font-bold text-gray-950">Habilidades / Tags Técnicas</h4>
                   <p className="text-xs text-gray-500 mt-1">
-                    A seção onde você escolhe tags pré-definidas (ex: React, Node.js, Metodologias Ágeis) funciona como um filtro indexador complementar direto. Garanta que as habilidades pedidas na vaga estejam selecionadas no seu cadastro.
+                    A seção onde você escolhe tags pré-definidas (ex: Excel Avançado, CRM, Power BI, Metodologias Ágeis, Atendimento ao Cliente) funciona como um filtro indexador complementar direto. Garanta que as habilidades pedidas na vaga estejam selecionadas no seu cadastro.
                   </p>
                 </div>
               </div>
@@ -178,7 +178,7 @@ export default function Guia() {
               <div className="p-3.5 bg-rose-50/40 border border-rose-100 rounded-xl flex items-start gap-2.5 text-xs">
                 <span className="font-bold text-rose-700 shrink-0">Erro 2:</span>
                 <p className="text-gray-700 leading-relaxed">
-                  <span className="font-bold text-gray-950">Usar clichês desgastados</span>. Termos genéricos como &quot;profissional proativo, focado, dedicado, motivado, que pensa fora da caixa&quot; não possuem valor semântico diferenciado na IA. Substitua-os por realizações e metodologias reais (ex: &quot;desenvolvi interfaces&quot;, &quot;liderei equipes ágeis&quot;).
+                  <span className="font-bold text-gray-950">Usar clichês desgastados</span>. Termos genéricos como &quot;profissional proativo, focado, dedicado, motivado, que pensa fora da caixa&quot; não possuem valor semântico diferenciado na IA. Substitua-os por realizações e metodologias reais (ex: &quot;reduzi retrabalho&quot;, &quot;liderei rotinas de fechamento&quot;, &quot;estruturei processos de atendimento&quot;).
                 </p>
               </div>
 
@@ -192,7 +192,7 @@ export default function Guia() {
               <div className="p-3.5 bg-rose-50/40 border border-rose-100 rounded-xl flex items-start gap-2.5 text-xs">
                 <span className="font-bold text-rose-700 shrink-0">Erro 4:</span>
                 <p className="text-gray-700 leading-relaxed">
-                  <span className="font-bold text-gray-950">Divergência de Cargo Alvo</span>. Se você está concorrendo a uma vaga de &quot;Desenvolvedor React&quot; mas o título principal no seu currículo e perfil está como &quot;Suporte Técnico&quot; ou apenas &quot;Estudante de Engenharia&quot;, seu peso semântico cai abruptamente. Alinhe seu título profissional ao da vaga.
+                  <span className="font-bold text-gray-950">Divergência de Cargo Alvo</span>. Se você está concorrendo a uma vaga de &quot;Analista Financeiro Pleno&quot; mas o título principal no seu currículo e perfil está como &quot;Assistente Administrativo&quot; ou apenas &quot;Estudante&quot;, seu peso semântico cai abruptamente. Alinhe seu título profissional ao da vaga.
                 </p>
               </div>
 
@@ -212,7 +212,7 @@ export default function Guia() {
               4. Dicas de Ouro para Subir no Ranking da Gupy
             </h2>
             <p className="mb-4">
-              Siga estes passos recomendados por especialistas em recrutamento técnico para obter notas elevadas:
+              Siga estes passos recomendados por especialistas em recrutamento e seleção para obter notas elevadas:
             </p>
 
             <div className="space-y-4">
@@ -221,7 +221,7 @@ export default function Guia() {
                 <div>
                   <h5 className="font-bold text-gray-900 text-sm">Integre Verbos de Ação Fortes</h5>
                   <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
-                    Escreva na primeira pessoa do singular no passado: &quot;Desenvolvi&quot;, &quot;Implementei&quot;, &quot;Criei&quot;, &quot;Liderei&quot;, &quot;Estruturei&quot;. Isso indica protagonismo e propriedade técnica nas suas entregas passadas.
+                    Escreva na primeira pessoa do singular no passado: &quot;Desenvolvi&quot;, &quot;Implementei&quot;, &quot;Criei&quot;, &quot;Liderei&quot;, &quot;Estruturei&quot;. Isso indica protagonismo, clareza e responsabilidade nas suas entregas passadas.
                   </p>
                 </div>
               </div>
@@ -231,7 +231,7 @@ export default function Guia() {
                 <div>
                   <h5 className="font-bold text-gray-900 text-sm">Use Palavras-Chave de Forma Orgânica</h5>
                   <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
-                    Não faça apenas um &quot;keyword stuffing&quot; (uma lista desconexa de palavras). O algoritmo semântico pontua melhor palavras integradas a frases fluidas, ex: &quot;Utilizei a biblioteca Tailwind CSS para garantir design responsivo...&quot;.
+                    Não faça apenas um &quot;keyword stuffing&quot; (uma lista desconexa de palavras). O algoritmo semântico pontua melhor palavras integradas a frases fluidas, ex: &quot;Utilizei Power BI para acompanhar indicadores comerciais...&quot;.
                   </p>
                 </div>
               </div>
@@ -272,3 +272,4 @@ export default function Guia() {
     </div>
   );
 }
+

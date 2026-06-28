@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSession } from '../context/SessionContext';
+import HiredFeedbackModal from './HiredFeedbackModal';
 import {
   LayoutDashboard,
   Sparkles,
@@ -10,11 +11,39 @@ import {
   X,
   ArrowRight,
   House,
+  PartyPopper,
 } from 'lucide-react';
+
+
+function HiredFeedbackCard({ compact = false, onClick }: { compact?: boolean; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`group block w-full text-left rounded-2xl border border-emerald-200/70 bg-gradient-to-br from-emerald-50 to-white shadow-sm hover:shadow-md hover:border-emerald-300 transition-all ${compact ? 'p-3' : 'p-4'}`}
+    >
+      <div className="flex items-start gap-3">
+        <div className="w-9 h-9 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-emerald-100">
+          <PartyPopper className="w-4.5 h-4.5" />
+        </div>
+        <div className="min-w-0">
+          <div className="flex items-center gap-1.5 text-emerald-800 font-black text-sm">
+            <span>Conseguiu a vaga?</span>
+          </div>
+          <p className="text-[11px] text-emerald-700/80 leading-relaxed mt-1">
+            Me avisa se você foi contratado pela Gupy usando a plataforma. Quero publicar relatos reais na landing page.
+          </p>
+        </div>
+      </div>
+    </button>
+  );
+}
+
 
 export function Sidebar() {
   const { isMockMode } = useSession();
   const location = useLocation();
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
@@ -35,9 +64,11 @@ export function Sidebar() {
       <div className="flex min-h-full flex-col justify-between p-6">
         <div>
           <Link to="/dashboard" className="flex items-center space-x-2.5 mb-8 px-2">
-            <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md shadow-indigo-200">
-              G
-            </div>
+            <img
+              src="/gupify-logo.png"
+              alt="Logo do Gupify"
+              className="w-9 h-9 rounded-xl shadow-md shadow-indigo-200 object-contain"
+            />
             <span className="text-xl font-black tracking-tight bg-gradient-to-r from-indigo-600 to-indigo-900 bg-clip-text text-transparent">
               Gupify<span className="text-slate-400 font-normal text-sm ml-0.5">Web</span>
             </span>
@@ -66,6 +97,8 @@ export function Sidebar() {
         </div>
 
         <div className="pt-6 border-t border-slate-100 space-y-4">
+          <HiredFeedbackCard onClick={() => setFeedbackOpen(true)} />
+
           <div className="flex items-center justify-between px-1">
             <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Status</span>
             {isMockMode ? (
@@ -90,6 +123,7 @@ export function Sidebar() {
           </Link>
         </div>
       </div>
+      <HiredFeedbackModal open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
     </aside>
   );
 }
@@ -99,6 +133,7 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
@@ -119,9 +154,11 @@ export default function Navbar() {
           <div className="flex justify-between h-16">
             <div className="flex items-center space-x-3 min-w-0">
               <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
-                <div className="w-9 h-9 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md shadow-indigo-200">
-                  G
-                </div>
+                <img
+                  src="/gupify-logo.png"
+                  alt="Logo do Gupify"
+                  className="w-9 h-9 rounded-lg shadow-md shadow-indigo-200 object-contain"
+                />
                 <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 to-indigo-800 bg-clip-text text-transparent">
                   Gupify<span className="text-gray-400 font-normal text-sm ml-0.5">Web</span>
                 </span>
@@ -148,14 +185,17 @@ export default function Navbar() {
   }
 
   return (
+    <>
     <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 animate-fade-in lg:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/dashboard" className="flex items-center space-x-2 flex-shrink-0" title="Voltar ao Painel">
-              <div className="w-9 h-9 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md shadow-indigo-200">
-                G
-              </div>
+              <img
+                src="/gupify-logo.png"
+                alt="Logo do Gupify"
+                className="w-9 h-9 rounded-lg shadow-md shadow-indigo-200 object-contain"
+              />
               <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 to-indigo-800 bg-clip-text text-transparent">
                 Gupify<span className="text-gray-400 font-normal text-sm ml-0.5">Web</span>
               </span>
@@ -196,6 +236,8 @@ export default function Navbar() {
           })}
 
           <div className="pt-4 pb-2 border-t border-gray-100 mt-3 px-3 flex flex-col gap-3">
+            <HiredFeedbackCard compact onClick={() => setFeedbackOpen(true)} />
+
             <div className="flex items-center justify-between">
               <span className="text-xs text-gray-500">Status da API:</span>
               {isMockMode ? (
@@ -225,6 +267,9 @@ export default function Navbar() {
         </div>
       )}
     </nav>
+    <HiredFeedbackModal open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
+    </>
   );
 }
+
 

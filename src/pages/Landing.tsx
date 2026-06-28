@@ -7,6 +7,10 @@ import {
   CheckCircle,
   ShieldAlert,
   Loader2,
+  SearchX,
+  FileText,
+  Target,
+  ClipboardCheck,
 } from 'lucide-react';
 
 type DemoProfile = {
@@ -266,41 +270,41 @@ export default function Landing() {
 
       <div className="py-12 bg-white w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-indigo-600 block mb-2">Diagnóstico Prático</span>
+          <div className="mb-12 max-w-3xl">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-rose-600 block mb-2">Primeiro: o problema</span>
             <h2 className="text-2xl sm:text-4xl font-black text-gray-900 tracking-tight">
-              Como o algoritmo elimina perfis qualificados
+              Candidatos bons somem antes de alguém ler o currículo
             </h2>
-            <p className="text-gray-500 text-xs sm:text-sm mt-1 max-w-xl font-normal">
-              A triagem semântica lê e ranqueia textos automaticamente. Se a estrutura do seu perfil não estiver programada para isso, você nem entra na disputa.
+            <p className="text-gray-500 text-xs sm:text-sm mt-2 max-w-2xl font-normal leading-relaxed">
+              Em vagas com centenas ou milhares de inscrições, a primeira disputa não é com o recrutador: é com a triagem automática. Se o seu perfil não conversa com a descrição da vaga, você pode ficar invisível mesmo tendo experiência.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch mb-14">
             <div className="gradientBorderCard-16 lg:col-span-7 p-8 shadow-sm flex flex-col justify-between relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 bg-rose-50 text-rose-600 rounded-bl-xl border-l border-b border-rose-100">
-                <ShieldAlert className="w-5 h-5" />
+                <SearchX className="w-5 h-5" />
               </div>
-              <div className="max-w-md">
-                <span className="text-[9px] uppercase font-extrabold tracking-wider text-rose-600 block mb-1">O Filtro de Cosseno</span>
-                <h3 className="text-xl font-black text-gray-950">A Barreira das Palavras-Chave Técnicas</h3>
+              <div className="max-w-lg">
+                <span className="text-[9px] uppercase font-extrabold tracking-wider text-rose-600 block mb-1">Dor principal</span>
+                <h3 className="text-xl font-black text-gray-950">Você se candidata, mas não recebe retorno</h3>
                 <p className="text-gray-500 text-xs mt-3 leading-relaxed">
-                  O robô da Gupy compara a semântica da descrição do cargo com a do seu cadastro. Escrever de forma genérica impede que a IA identifique a aderência técnica da sua bagagem, resultando em exclusão imediata na primeira rodada de triagem.
+                  Muitas vezes o problema não é falta de capacidade. É falta de alinhamento entre o texto do seu cadastro, o currículo enviado e os termos que a vaga usa para descrever responsabilidades, ferramentas, competências e resultados esperados.
                 </p>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-indigo-600">
-                <span>IMPACTO NO SCORE GUPY: CRÍTICO</span>
+              <div className="mt-8 pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-rose-600">
+                <span>RISCO: SER RANQUEADO NO FIM DA LISTA</span>
                 <span className="text-gray-400">01 / 03</span>
               </div>
             </div>
 
             <div className="gradientBorderCard-12 lg:col-span-5 p-6 shadow-sm flex flex-col justify-between">
               <div>
-                <span className="text-[9px] uppercase font-extrabold tracking-wider text-amber-600 block mb-1">Estratégia de Escrita</span>
-                <h3 className="text-lg font-bold text-gray-950">A Tração do Campo &quot;Sobre você&quot;</h3>
+                <span className="text-[9px] uppercase font-extrabold tracking-wider text-amber-600 block mb-1">Campo subestimado</span>
+                <h3 className="text-lg font-bold text-gray-950">O “Sobre você” costuma ficar fraco</h3>
                 <p className="text-gray-500 text-xs mt-2 leading-relaxed">
-                  Este espaço de 1.500 caracteres na Gupy concentra os maiores pesos semânticos do motor. Candidatos que o deixam em branco ou resumem em duas linhas eliminam sua principal chance de ranqueamento automático.
+                  Esse campo de até 1.500 caracteres é uma chance enorme de contextualizar sua trajetória. Quando ele fica vazio, genérico ou curto demais, a plataforma tem menos evidências para conectar seu perfil à vaga.
                 </p>
               </div>
               <div className="mt-6 pt-3 border-t border-gray-100 text-[10px] text-gray-400 font-bold uppercase tracking-wider">
@@ -310,39 +314,65 @@ export default function Landing() {
 
             <div className="gradientBorderCard-8 lg:col-span-5 p-5 shadow-sm flex flex-col justify-between">
               <div>
-                <span className="text-[9px] uppercase font-extrabold tracking-wider text-indigo-600 block mb-1">Engrenagem Estrutural</span>
-                <h3 className="text-lg font-bold text-gray-950">Evite Clichês que Rebaixam Notas</h3>
+                <span className="text-[9px] uppercase font-extrabold tracking-wider text-indigo-600 block mb-1">Texto sem direção</span>
+                <h3 className="text-lg font-bold text-gray-950">Clichês não provam aderência</h3>
                 <p className="text-gray-500 text-xs mt-2 leading-relaxed">
-                  Palavras vazias como &quot;profissional proativo&quot;, &quot;dedicado&quot; ou &quot;pensar fora da caixa&quot; não carregam relevância semântica. O algoritmo valoriza fatos descritos com verbos de ação robustos.
+                  Frases como “sou proativo”, “aprendo rápido” e “busco desafios” dizem pouco. O algoritmo e o recrutador precisam de evidências: atividades, ferramentas, indicadores, contexto de negócio e conquistas.
                 </p>
               </div>
               <div className="mt-6 pt-3 border-t border-gray-100 text-[10px] text-indigo-600 font-bold">
-                Solução: Substituir por conquistas tangíveis
+                Solução: trocar adjetivos por fatos verificáveis
               </div>
             </div>
 
-            <div className="gradientBorderCard-16 lg:col-span-7 p-8 shadow-sm flex flex-col justify-between bg-indigo-50/10">
+            <div className="gradientBorderCard-16 lg:col-span-7 p-8 shadow-sm flex flex-col justify-between">
               <div>
-                <span className="text-[9px] uppercase font-extrabold tracking-wider text-emerald-600 block mb-1">Como Funciona</span>
-                <h3 className="text-xl font-black text-gray-950">Simples, rápido, sem cadastro</h3>
+                <span className="text-[9px] uppercase font-extrabold tracking-wider text-rose-600 block mb-1">Desalinhamento semântico</span>
+                <h3 className="text-xl font-black text-gray-950">A vaga fala uma língua, seu perfil fala outra</h3>
                 <p className="text-gray-500 text-xs mt-3 leading-relaxed">
-                  Cole seu currículo e a descrição da vaga. A IA analisa os requisitos, extrai as palavras-chave de maior peso semântico e gera um texto profissional pronto para colar no campo &quot;Sobre você&quot; da Gupy.
+                  “Atendimento ao cliente”, “customer success”, “suporte ao usuário” e “relacionamento com contas” podem estar ligados, mas precisam aparecer de forma estratégica. O mesmo vale para finanças, marketing, RH, operações, saúde, vendas, produto e tecnologia.
                 </p>
-                <div className="grid grid-cols-2 gap-3 mt-6">
-                  <div className="p-3 bg-indigo-50/40 rounded-xl border border-indigo-100/30 text-xs text-indigo-700 font-semibold">
-                    ✓ Sem cadastro necessário
-                  </div>
-                  <div className="p-3 bg-indigo-50/40 rounded-xl border border-indigo-100/30 text-xs text-indigo-700 font-semibold">
-                    ✓ Sessão temporária segura
-                  </div>
-                  <div className="p-3 bg-indigo-50/40 rounded-xl border border-indigo-100/30 text-xs text-indigo-700 font-semibold">
-                    ✓ Checklist de qualidade ATS
-                  </div>
-                  <div className="p-3 bg-indigo-50/40 rounded-xl border border-indigo-100/30 text-xs text-indigo-700 font-semibold">
-                    ✓ Exportação em PDF
-                  </div>
-                </div>
               </div>
+              <div className="mt-8 pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-rose-600">
+                <span>EFEITO: MENOS COMPATIBILIDADE PERCEBIDA</span>
+                <span className="text-gray-400">03 / 03</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-10 max-w-3xl">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-indigo-600 block mb-2">Depois: o que a plataforma faz</span>
+            <h2 className="text-2xl sm:text-4xl font-black text-gray-900 tracking-tight">
+              O Gupify transforma sua experiência em um resumo direcionado para a vaga
+            </h2>
+            <p className="text-gray-500 text-xs sm:text-sm mt-2 max-w-2xl font-normal leading-relaxed">
+              Você informa o currículo e a descrição da vaga. A plataforma identifica o que mais importa, organiza seu texto e entrega um resumo pronto para revisar e colar no cadastro da Gupy.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="bg-indigo-50/40 border border-indigo-100/60 rounded-2xl p-5">
+              <FileText className="w-6 h-6 text-indigo-600 mb-4" />
+              <h3 className="text-sm font-black text-gray-950">Lê seu contexto</h3>
+              <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+                Usa as informações do currículo para entender trajetória, senioridade, áreas de atuação e principais entregas.
+              </p>
+            </div>
+
+            <div className="bg-indigo-50/40 border border-indigo-100/60 rounded-2xl p-5">
+              <Target className="w-6 h-6 text-indigo-600 mb-4" />
+              <h3 className="text-sm font-black text-gray-950">Cruza com a vaga</h3>
+              <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+                Extrai responsabilidades, competências e palavras-chave relevantes, sem limitar a ferramenta a uma área específica.
+              </p>
+            </div>
+
+            <div className="bg-indigo-50/40 border border-indigo-100/60 rounded-2xl p-5">
+              <ClipboardCheck className="w-6 h-6 text-indigo-600 mb-4" />
+              <h3 className="text-sm font-black text-gray-950">Gera e valida</h3>
+              <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+                Cria um texto com verbos de ação, evidências e termos estratégicos, além de checklist e score para orientar ajustes.
+              </p>
             </div>
           </div>
         </div>
@@ -421,9 +451,11 @@ export default function Landing() {
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-6">
             <div>
               <div className="flex items-center justify-start space-x-2">
-                <div className="w-7 h-7 bg-indigo-600 rounded flex items-center justify-center text-white font-bold text-sm">
-                  G
-                </div>
+                <img
+                  src="/gupify-logo.png"
+                  alt="Logo do Gupify"
+                  className="w-7 h-7 rounded object-contain"
+                />
                 <span className="font-extrabold text-white tracking-wider">Gupify Web</span>
               </div>
               <p className="mt-2 text-[10px] text-gray-500 max-w-sm font-normal">
@@ -448,4 +480,5 @@ export default function Landing() {
     </div>
   );
 }
+
 

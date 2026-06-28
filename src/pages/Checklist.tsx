@@ -10,10 +10,10 @@ const SECTIONS: Section[] = [
     id: 'perfil',
     title: 'Fase 1 — Cadastro e Perfil Geral',
     items: [
-      { id: 'p1', text: 'Título profissional alinhado ao cargo pretendido (ex: "Dev Frontend React" em vez de "Profissional de TI")' },
+      { id: 'p1', text: 'Título profissional alinhado ao cargo pretendido (ex: "Analista Financeiro Pleno" em vez de "Profissional Administrativo")' },
       { id: 'p2', text: 'Resumo "Sobre você" otimizado pelo Gupify (800–1.400 caracteres)' },
-      { id: 'p3', text: 'Contato atualizado — telefone, e-mail, LinkedIn e GitHub' },
-      { id: 'p4', text: 'Tags de habilidades técnicas selecionadas batem exatamente com os requisitos da vaga' },
+      { id: 'p3', text: 'Contato atualizado — telefone, e-mail, LinkedIn e portfólio quando fizer sentido' },
+      { id: 'p4', text: 'Tags de competências, ferramentas e conhecimentos selecionadas batem com os requisitos da vaga' },
       { id: 'p5', text: 'Pretensão salarial e áreas de interesse preenchidos corretamente' },
     ],
   },
@@ -32,7 +32,7 @@ const SECTIONS: Section[] = [
     title: 'Fase 3 — Currículo em PDF',
     items: [
       { id: 'a1', text: 'PDF gerado com texto pesquisável e selecionável (nunca salve como imagem)' },
-      { id: 'a2', text: 'Nome do arquivo limpo e profissional (ex: "Curriculo_SeuNome_Dev.pdf")' },
+      { id: 'a2', text: 'Nome do arquivo limpo e profissional (ex: "Curriculo_SeuNome_Area.pdf")' },
       { id: 'a3', text: 'Layout de coluna única — ATS lê melhor texto de cima para baixo, sem colunas ou tabelas decorativas' },
     ],
   },
@@ -41,7 +41,7 @@ const SECTIONS: Section[] = [
     title: 'Fase 4 — Testes e Envio Final',
     items: [
       { id: 't1', text: 'Testes comportamentais respondidos com calma e honestidade' },
-      { id: 't2', text: 'Testes técnicos (lógica, inglês) feitos em local silencioso' },
+      { id: 't2', text: 'Testes de conhecimento, lógica, idiomas ou ferramentas feitos em local silencioso' },
       { id: 't3', text: 'Questionários da empresa respondidos em detalhes, demonstrando interesse real' },
     ],
   },
@@ -200,3 +200,4 @@ export default function Checklist() {
     </div>
   );
 }
+

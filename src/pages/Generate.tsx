@@ -18,10 +18,11 @@ import {
 } from 'lucide-react';
 
 const FLOATING_KEYWORDS = [
-  'React', 'TypeScript', 'Node.js', 'Spring Boot', 'Docker', 'AWS',
-  'PostgreSQL', 'Git', 'API REST', 'Scrum', 'CI/CD', 'Kubernetes',
-  'Java', 'Python', 'Tailwind', 'Clean Code', 'TDD', 'Microsserviços',
-  'Redis', 'MongoDB', 'GraphQL', 'Next.js', 'Figma', 'Agile',
+  'Gestão de Projetos', 'Excel Avançado', 'Power BI', 'Atendimento', 'Vendas',
+  'CRM', 'Comunicação', 'Liderança', 'Indicadores', 'Processos', 'Negociação',
+  'Marketing Digital', 'Logística', 'Financeiro', 'People Analytics', 'Figma',
+  'Pesquisa com Usuários', 'SQL', 'Agile', 'Compliance', 'Planejamento',
+  'Análise de Dados', 'Sucesso do Cliente', 'Operações',
 ];
 
 function GeneratingOverlay() {
@@ -87,7 +88,7 @@ function GeneratingOverlay() {
         </h2>
         <p className="text-sm text-slate-500 leading-relaxed mb-6">
           A IA está analisando seu currículo e extraindo as{' '}
-          <span className="text-indigo-600 font-semibold">palavras-chave de maior impacto</span>{' '}
+          <span className="text-indigo-600 font-semibold">competências, termos e requisitos de maior impacto</span>{' '}
           para o algoritmo da Gupy.
         </p>
 
@@ -276,7 +277,7 @@ export default function Generate() {
       <div className="mb-8">
         <h1 className="text-2xl font-black text-slate-900 tracking-tight">Otimizar currículo</h1>
         <p className="text-sm text-slate-500 mt-0.5">
-          Informe o currículo e a vaga desejada. A IA ajusta seu resumo para score máximo no algoritmo da Gupy.
+          Informe o currículo e a vaga desejada. A IA ajusta seu resumo para aumentar a aderência ao algoritmo da Gupy.
         </p>
       </div>
 
@@ -312,7 +313,7 @@ export default function Generate() {
                 id="job-title"
                 value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
-                placeholder="Ex: Desenvolvedor React Pleno"
+                placeholder="Ex: Analista Administrativo Pleno"
                 className="w-full px-3 py-2.5 text-sm text-slate-800 bg-slate-50 border border-slate-200 rounded-lg focus:border-indigo-400 focus:ring-1 focus:ring-indigo-100 transition-all placeholder:text-slate-300"
                 required
               />
@@ -329,7 +330,7 @@ export default function Generate() {
                 id="job-content"
                 value={jobContent}
                 onChange={(e) => setJobContent(e.target.value)}
-                placeholder="Cole aqui os requisitos técnicos, atribuições e descrição completa da vaga anunciada na Gupy..."
+                placeholder="Cole aqui as responsabilidades, requisitos, habilidades desejadas, benefícios e a descrição completa da vaga anunciada na Gupy..."
                 rows={6}
                 className="w-full px-3 py-2.5 text-sm text-slate-800 bg-slate-50 border border-slate-200 rounded-lg focus:border-indigo-400 focus:ring-1 focus:ring-indigo-100 transition-all resize-none placeholder:text-slate-300 leading-relaxed"
                 required
@@ -353,4 +354,5 @@ export default function Generate() {
     </div>
   );
 }
+
 

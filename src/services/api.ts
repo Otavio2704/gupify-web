@@ -183,8 +183,8 @@ const initMockDB = () => {
     setLocalData('gupify_mock_cvs', [
       {
         id: 'cv-1',
-        name: 'Curriculo_Frontend_React.pdf',
-        content: 'Desenvolvedor Frontend com 3 anos de experiência em React, Tailwind CSS e TypeScript.',
+        name: 'Curriculo_Analista_Marketing.pdf',
+        content: 'Analista de marketing com experiência em campanhas digitais, CRM, análise de indicadores, branding e geração de demanda.',
         uploadedAt: new Date(Date.now() - 3600000 * 24 * 3).toISOString(),
       },
     ]);
@@ -197,7 +197,7 @@ const initMockDB = () => {
 initMockDB();
 
 const simulateAIGeneration = (cvText: string, jobTitle: string, jobContent: string, previousVersionsCount = 0) => {
-  const sampleKeywords = ['React', 'TypeScript', 'Node.js', 'Tailwind CSS', 'Git', 'API REST', 'Scrum', 'SQL', 'Docker', 'Spring Boot', 'Java'];
+  const sampleKeywords = ['Excel', 'Power BI', 'CRM', 'Atendimento ao Cliente', 'Vendas', 'Negociação', 'Marketing Digital', 'Gestão de Projetos', 'SQL', 'Scrum', 'Figma', 'Logística', 'Financeiro', 'People Analytics'];
   const words = (jobTitle + ' ' + jobContent)
     .toLowerCase()
     .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '')
@@ -208,7 +208,7 @@ const simulateAIGeneration = (cvText: string, jobTitle: string, jobContent: stri
   );
 
   while (matchedKeywords.length < 3) {
-    const defaultKws = ['Metodologias Ágeis', 'Resolução de Problemas', 'Clean Code'];
+    const defaultKws = ['Comunicação', 'Organização', 'Resolução de Problemas'];
     const nextKw = defaultKws.find((k) => !matchedKeywords.includes(k));
     matchedKeywords.push(nextKw || 'Boas Práticas');
   }
@@ -216,7 +216,7 @@ const simulateAIGeneration = (cvText: string, jobTitle: string, jobContent: stri
   const selectedKeywords = matchedKeywords.slice(0, 3);
   const summary = previousVersionsCount > 0
     ? `Na versão ${previousVersionsCount + 1} para ${jobTitle}, destaquei entregas com foco em resultados mensuráveis, aderência ao ATS e experiência prática com ${selectedKeywords.join(', ')}, conectando sua trajetória às exigências centrais da vaga.`
-    : `Como profissional especializado em ${jobTitle}, desenvolvi e criei soluções focadas em alto desempenho. Com ampla experiência prática na utilização de ${selectedKeywords.join(', ')}, liderei a arquitetura e implementação de módulos dinâmicos alinhados aos objetivos estratégicos da empresa.`;
+    : `Como profissional com foco em ${jobTitle}, conduzi entregas orientadas a resultado, organização e melhoria contínua. Tenho experiência prática com ${selectedKeywords.join(', ')}, conectando minha trajetória às responsabilidades da vaga e aos objetivos estratégicos da empresa.`;
 
   return { summary, keywords: selectedKeywords };
 };
@@ -605,5 +605,6 @@ export const reports = {
     }
   },
 };
+
 
 
