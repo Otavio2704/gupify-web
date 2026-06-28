@@ -16,6 +16,14 @@ interface CvUploaderProps {
   onSelectCv: (cv: any) => void;
 }
 
+// 🔒 FIX #5 (Média): MIME types permitidos definidos como constante
+// Validar por MIME type é mais seguro que só por extensão — impede que um
+// arquivo renomeado (ex: malware.exe → cv.pdf) passe pela validação
+const ALLOWED_MIME_TYPES = [
+  'application/pdf',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+];
+
 export default function CvUploader({ selectedCvId, onSelectCv }: CvUploaderProps) {
   const [cvList, setCvList] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +32,6 @@ export default function CvUploader({ selectedCvId, onSelectCv }: CvUploaderProps
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [dragActive, setDragActive] = useState(false);
 
-  // Fetch CV list on mount
   const loadCvs = async () => {
     try {
       setLoading(true);
@@ -32,7 +39,6 @@ export default function CvUploader({ selectedCvId, onSelectCv }: CvUploaderProps
       const data = await cvApi.list();
       setCvList(data || []);
       
-      // Auto-select the first CV if none is selected and we have CVs
       if (data && data.length > 0 && !selectedCvId) {
         onSelectCv(data[0]);
       }
@@ -48,18 +54,16 @@ export default function CvUploader({ selectedCvId, onSelectCv }: CvUploaderProps
     loadCvs();
   }, []);
 
-  // Handle file upload
   const handleFileUpload = async (file: File) => {
     if (!file) return;
-    
-    // Validate file type
-    const fileExt = file.name.split('.').pop()?.toLowerCase();
-    if (fileExt !== 'pdf' && fileExt !== 'docx') {
+
+    // 🔒 FIX #5 (Média): Validação por MIME type substituindo (e complementando)
+    // a validação anterior que só checava extensão do nome do arquivo
+    if (!ALLOWED_MIME_TYPES.includes(file.type)) {
       setError("Por favor, envie apenas arquivos nos formatos PDF ou DOCX.");
       return;
     }
 
-    // Validate size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
       setError("O arquivo excede o limite de tamanho de 5MB.");
       return;
@@ -77,11 +81,9 @@ export default function CvUploader({ selectedCvId, onSelectCv }: CvUploaderProps
       
       setUploadSuccess(true);
       
-      // Reload CV list and select the newly uploaded CV
       await loadCvs();
       onSelectCv(newCv);
       
-      // Clear success alert after 3 seconds
       setTimeout(() => setUploadSuccess(false), 3000);
     } catch (err) {
       console.error("Error uploading CV:", err);
@@ -97,7 +99,6 @@ export default function CvUploader({ selectedCvId, onSelectCv }: CvUploaderProps
     }
   };
 
-  // Drag and drop handlers
   const handleDrag = (e: React.DragEvent<HTMLDivElement | HTMLLabelElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -117,9 +118,8 @@ export default function CvUploader({ selectedCvId, onSelectCv }: CvUploaderProps
     }
   };
 
-  // Delete CV
   const handleDeleteCv = async (e: React.MouseEvent, id: string) => {
-    e.stopPropagation(); // Stop selection trigger
+    e.stopPropagation();
     if (!confirm("Tem certeza que deseja excluir este currículo? Esta ação não pode ser desfeita.")) {
       return;
     }
@@ -128,11 +128,9 @@ export default function CvUploader({ selectedCvId, onSelectCv }: CvUploaderProps
       setError(null);
       await cvApi.remove(id);
       
-      // Update list
       const updatedList = cvList.filter(item => item.id !== id);
       setCvList(updatedList);
       
-      // If we deleted the currently selected CV, select another one or reset
       if (selectedCvId === id) {
         if (updatedList.length > 0) {
           onSelectCv(updatedList[0]);
@@ -172,7 +170,6 @@ export default function CvUploader({ selectedCvId, onSelectCv }: CvUploaderProps
         </div>
       )}
 
-      {/* Grid of existing CVs */}
       <div className="mb-5">
         <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
           Currículos Salvos nesta Sessão ({cvList.length})
@@ -237,7 +234,6 @@ export default function CvUploader({ selectedCvId, onSelectCv }: CvUploaderProps
         )}
       </div>
 
-      {/* Drag & Drop Upload Zone */}
       <div className="relative" onDragEnter={handleDrag}>
         <input
           type="file"

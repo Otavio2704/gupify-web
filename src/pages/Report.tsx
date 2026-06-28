@@ -20,6 +20,16 @@ import {
   Briefcase,
 } from 'lucide-react';
 
+// 🔒 FIX #1 (Crítico): Sanitização contra XSS no document.write
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 export default function Report() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -124,9 +134,15 @@ export default function Report() {
       alert('Permita pop-ups para exportar o PDF.');
       return;
     }
-    const kws = (report.keywords || []).map((k: string) => `<li>#${k}</li>`).join('');
+
+    // 🔒 FIX #1 (Crítico): Todos os campos interpolados agora passam por escapeHtml
+    // antes de serem escritos via document.write, prevenindo XSS
+    const kws = (report.keywords || [])
+      .map((k: string) => `<li>#${escapeHtml(k)}</li>`)
+      .join('');
+
     w.document.write(`
-      <html><head><title>Gupify — ${report.jobTitle}</title>
+      <html><head><title>Gupify — ${escapeHtml(report.jobTitle)}</title>
       <style>
         body{font-family:'Segoe UI',sans-serif;color:#0f172a;margin:40px;line-height:1.6}
         .logo{font-size:22px;font-weight:900;color:#4f46e5}
@@ -140,14 +156,14 @@ export default function Report() {
       </style></head><body>
       <div class="logo">Gupify</div>
       <div class="sub">Otimizador de Perfil para a Gupy</div>
-      <h2>${report.jobTitle}</h2>
+      <h2>${escapeHtml(report.jobTitle)}</h2>
       <div class="meta">
-        <strong>Currículo:</strong> ${report.cvName || '—'}<br>
-        <strong>Gerado em:</strong> ${formatReportDate(report.createdAt)}<br>
+        <strong>Currículo:</strong> ${escapeHtml(report.cvName || '—')}<br>
+        <strong>Gerado em:</strong> ${escapeHtml(formatReportDate(report.createdAt))}<br>
         <strong>Tamanho:</strong> ${editedSummary.length} caracteres
       </div>
       <div class="label">Resumo otimizado — cole no campo "Sobre você" da Gupy</div>
-      <div class="box">${editedSummary.replace(/\n/g, '<br>')}</div>
+      <div class="box">${escapeHtml(editedSummary).replace(/\n/g, '<br>')}</div>
       <div class="label">Palavras-chave de alto impacto</div>
       <ul>${kws}</ul>
       <div class="footer">Gerado pelo Gupify · Uso pessoal e educacional</div>
@@ -372,4 +388,3 @@ export default function Report() {
     </div>
   );
 }
-
