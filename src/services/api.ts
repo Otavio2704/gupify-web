@@ -1,10 +1,16 @@
 const resolveApiBaseUrl = () => {
   const envBaseUrl = (import.meta as any).env.VITE_API_BASE_URL?.trim();
   if (envBaseUrl) return envBaseUrl.replace(/\/$/, '');
-  return (import.meta as any).env.DEV ? 'http://localhost:8080' : 'https://gupify.onrender.com';
+  // FIX: fallback de produção removido — URL vem sempre de VITE_API_BASE_URL.
+  // Em dev sem a variável definida, cai no localhost.
+  return (import.meta as any).env.DEV ? 'http://localhost:8080' : '';
 };
 
 const API_BASE_URL = resolveApiBaseUrl();
+
+if (!API_BASE_URL && !(import.meta as any).env.DEV) {
+  console.error('[Gupify] VITE_API_BASE_URL não definida. Configure a variável no ambiente de build.');
+}
 
 let useMock = false;
 let onMockStateChange: ((val: boolean) => void) | null = null;
@@ -28,6 +34,7 @@ const normalizeReport = (report: any) => ({
   ...report,
   id: report.id || report.reportId,
   jobTitle: report.jobDescriptionTitle || report.jobTitle || 'Vaga Alvo',
+  // FIX: lê jobDescriptionContent que agora vem do back-end no GET /api/reports/:id
   jobContent: report.jobDescriptionContent || report.jobContent || '',
   cvName: report.cvName || report.cvFileName || 'Currículo Selecionado',
   createdAt: report.createdAt || report.generatedAt || new Date().toISOString(),
@@ -135,6 +142,9 @@ const mergeWithCachedReport = (report: any) => {
   const cached = getCachedReport(String(normalized.id));
   if (!cached) return normalized;
 
+  // FIX: jobContent agora vem do back (jobDescriptionContent no DTO).
+  // O merge ainda serve como fallback para dados mais completos em localStorage
+  // (ex: cvName que o back não persiste).
   const hasJobTitle = !!(report?.jobDescriptionTitle || report?.jobTitle);
   const hasJobContent = !!(report?.jobDescriptionContent || report?.jobContent);
   const hasCvName = !!(report?.cvName || report?.cvFileName);
@@ -430,6 +440,8 @@ export const reports = {
     try {
       const res = await apiFetch(`/api/reports/${id}`);
       const r = await res.json();
+      // FIX: jobDescriptionContent já vem no response, mergeWithCachedReport
+      // complementa com cvName e versions do localStorage quando disponíveis.
       const merged = mergeWithCachedReport(r);
       const localList = getLocalData('gupify_mock_reports', []);
       const localFound = localList.find((item: any) => item.id === id);
@@ -470,7 +482,8 @@ export const reports = {
         id,
         summary: updated.summary || body.summary,
         jobTitle: updated.jobDescriptionTitle || cached?.jobTitle,
-        jobContent: updated.jobDescriptionContent || cached?.jobContent || '',
+        // FIX: lê jobDescriptionContent que agora vem no response do PUT também
+        jobContent: updated.jobDescriptionContent || updated.jobContent || cached?.jobContent || '',
         cvName: updated.cvFileName || cached?.cvName,
         versions,
       }));
@@ -605,6 +618,3 @@ export const reports = {
     }
   },
 };
-
-
-
