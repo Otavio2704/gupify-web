@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSession } from '../context/SessionContext';
 import HiredFeedbackModal from './HiredFeedbackModal';
+import { GUPIFY_LOGO } from '../utils/assets';
 import {
   LayoutDashboard,
   Sparkles,
@@ -65,7 +66,7 @@ export function Sidebar() {
         <div>
           <Link to="/dashboard" className="flex items-center space-x-2.5 mb-8 px-2">
             <img
-              src="/gupify-logo.png"
+              src={GUPIFY_LOGO}
               alt="Logo do Gupify"
               className="w-9 h-9 rounded-xl shadow-md shadow-indigo-200 object-contain"
             />
@@ -155,7 +156,7 @@ export default function Navbar() {
             <div className="flex items-center space-x-3 min-w-0">
               <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
                 <img
-                  src="/gupify-logo.png"
+                  src={GUPIFY_LOGO}
                   alt="Logo do Gupify"
                   className="w-9 h-9 rounded-lg shadow-md shadow-indigo-200 object-contain"
                 />
@@ -192,7 +193,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link to="/dashboard" className="flex items-center space-x-2 flex-shrink-0" title="Voltar ao Painel">
               <img
-                src="/gupify-logo.png"
+                src={GUPIFY_LOGO}
                 alt="Logo do Gupify"
                 className="w-9 h-9 rounded-lg shadow-md shadow-indigo-200 object-contain"
               />
@@ -271,5 +272,3 @@ export default function Navbar() {
     </>
   );
 }
-
-

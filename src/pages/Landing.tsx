@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSession } from '../context/SessionContext';
+import { GUPIFY_LOGO } from '../utils/assets';
 import {
   Sparkles,
   ArrowRight,
@@ -452,7 +453,7 @@ export default function Landing() {
             <div>
               <div className="flex items-center justify-start space-x-2">
                 <img
-                  src="/gupify-logo.png"
+                  src={GUPIFY_LOGO}
                   alt="Logo do Gupify"
                   className="w-7 h-7 rounded object-contain"
                 />
